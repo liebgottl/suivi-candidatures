@@ -37,7 +37,11 @@ app.delete('/candidatures/:id', (req, res) => {
   res.json({ success: true });
 });
 
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Serveur démarré sur http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
 

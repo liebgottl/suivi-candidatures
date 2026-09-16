@@ -5,6 +5,7 @@ function App() {
   const [candidatures, setCandidatures] = useState([]);
   const [entreprise, setEntreprise] = useState('');
   const [poste, setPoste] = useState('');
+  const [filtre, setFiltre] = useState('toutes');
 
   const chargerCandidatures = () => {
     fetch('http://localhost:3000/candidatures')
@@ -43,6 +44,10 @@ function App() {
     }).then(() => chargerCandidatures());
   };
 
+  const candidaturesFiltrees = filtre === 'toutes'
+    ? candidatures
+    : candidatures.filter(c => c.statut === filtre);
+
   return (
     <div>
       <h1>Suivi de candidatures</h1>
@@ -63,10 +68,21 @@ function App() {
         <button type="submit">Ajouter</button>
       </form>
 
+      <div>
+        <label>Filtrer : </label>
+        <select value={filtre} onChange={(e) => setFiltre(e.target.value)}>
+          <option value="toutes">Toutes</option>
+          <option value="envoyée">Envoyée</option>
+          <option value="entretien">Entretien</option>
+          <option value="refus">Refus</option>
+          <option value="acceptée">Acceptée</option>
+        </select>
+      </div>
+
       <ul>
-        {candidatures.map(c => (
+        {candidaturesFiltrees.map(c => (
           <li key={c.id}>
-            {c.entreprise} — {c.poste} ({c.statut})
+            {c.entreprise} — {c.poste} <span className={`statut statut-${c.statut}`}>({c.statut})</span>
             <select
               value={c.statut}
               onChange={(e) => changerStatut(c.id, e.target.value)}
