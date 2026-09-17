@@ -8,7 +8,7 @@ function App() {
   const [filtre, setFiltre] = useState('toutes');
 
   const chargerCandidatures = () => {
-    fetch('http://localhost:3000/candidatures')
+    fetch(import.meta.env.VITE_API_URL + '/candidatures')
       .then(res => res.json())
       .then(data => setCandidatures(data));
   };
@@ -19,7 +19,7 @@ function App() {
 
   const ajouterCandidature = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3000/candidatures', {
+    fetch(import.meta.env.VITE_API_URL + '/candidatures'  , {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ entreprise, poste, date_envoi: new Date().toISOString().split('T')[0] })
@@ -31,7 +31,7 @@ function App() {
   };
 
   const changerStatut = (id, nouveauStatut) => {
-    fetch(`http://localhost:3000/candidatures/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/candidatures/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ statut: nouveauStatut })
@@ -39,7 +39,7 @@ function App() {
   };
 
   const supprimerCandidature = (id) => {
-    fetch(`http://localhost:3000/candidatures/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/candidatures/${id}`, {
       method: 'DELETE'
     }).then(() => chargerCandidatures());
   };
