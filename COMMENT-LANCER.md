@@ -65,3 +65,6 @@ Va sur **http://localhost:5173/** dans ton navigateur.
 - `git add .` puis `git commit -m "message"` puis `git push` pour sauvegarder tes changements sur GitHub
 - Si erreur "git n'est pas reconnu" → redémarrer le terminal après une installation
 - Toujours vérifier que les DEUX terminaux (backend + frontend) tournent en même temps
+- Render -> site deploiement backend (https://suivi-candidatures-api.onrender.com/candidatures)
+- Vercel -> site deploiement frontend (https://suivi-candidatures-xi.vercel.app/)
+-
